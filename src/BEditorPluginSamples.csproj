@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+        <Nullable>enable</Nullable>
+        <!--ユーザー名を指定-->
+        <!--<UserName></UserName>-->
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+        <Optimize>false</Optimize>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="BEditor.Audio" Version="0.2.0" />
+        <PackageReference Include="BEditor.Base" Version="0.2.0" />
+        <PackageReference Include="BEditor.Compute" Version="0.2.0" />
+        <PackageReference Include="BEditor.Core" Version="0.2.0" />
+        <PackageReference Include="BEditor.Drawing" Version="0.2.0" />
+        <PackageReference Include="BEditor.Graphics" Version="0.2.0" />
+        <PackageReference Include="BEditor.Media" Version="0.2.0" />
+        <PackageReference Include="BEditor.Packaging" Version="0.2.0" />
+        <PackageReference Include="BEditor.Settings" Version="0.2.0" />
+    </ItemGroup>
+
+    <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('windows'))">
+        <OutputPath>C:\Users\$(UserName)\AppData\Roaming\BEditor\plugins\BEditorPluginSamples</OutputPath>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="$([MSBuild]::IsOSUnixLike())">
+        <OutputPath>\home\$(UserName)\.beditor\plugins\BEditorPluginSamples</OutputPath>
+    </PropertyGroup>
+
+</Project>
