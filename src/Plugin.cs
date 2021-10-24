@@ -1,14 +1,11 @@
-﻿
-using BEditor;
+﻿using BEditor;
 using BEditor.Data;
-using BEditor.Drawing;
 using BEditor.Plugin;
-
-using OpenCvSharp;
 
 using System;
 using System.ComponentModel;
 using System.IO;
+using System.Threading.Tasks;
 
 using static BEditorPluginSamples.PluginSettings;
 
@@ -55,7 +52,21 @@ namespace BEditorPluginSamples
         {
             PluginBuilder.Configure<Plugin>()
                 .With(ObjectMetadata.Create<MultipleObject>("多重画像"))
+                .Task(new PluginTask(PluginLoadingTask, "プラグインを読み込んでいます。"))
                 .Register();
+        }
+
+        private static async ValueTask PluginLoadingTask(IProgressDialog dialog)
+        {
+            dialog.Maximum = 5;
+
+            for (int i = 5 - 1; i >= 0; i--)
+            {
+                dialog.Text = $"あと {i}秒";
+                await Task.Delay(1000);
+
+                dialog.Value = 5 - i;
+            }
         }
     }
 
